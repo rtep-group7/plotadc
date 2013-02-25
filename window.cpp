@@ -3,7 +3,10 @@
 #include <cmath>  // for sine stuff
 
 
-Window::Window() : plot( QString("Example Plot") ), gain(5), count(0) // <-- 'c++ initialisation list' - google it!
+Window::Window() : plot( QString("Example Plot") ), gain(5), count(0),
+		   adc("/dev/spidev0.0",
+		       SPI_CPHA | SPI_CPOL,
+		       8,50000,10)
 {
 	// set up the gain knob
 	knob.setValue(gain);
@@ -48,7 +51,8 @@ Window::Window() : plot( QString("Example Plot") ), gain(5), count(0) // <-- 'c+
 void Window::timerEvent( QTimerEvent * )
 {
 	// generate an sine wave input for example purposes - you must get yours from the A/D!
-	double inVal = gain * sin( M_PI * count/50.0 );
+	//double inVal = gain * sin( M_PI * count/50.0 );
+  double inVal = (double)adc.readValue() / 32768.0;
 	++count;
 
 	// add the new input to the plot

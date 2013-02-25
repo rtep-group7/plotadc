@@ -6,6 +6,8 @@
 #include <qwt/qwt_plot.h>
 #include <qwt/qwt_plot_curve.h>
 
+#include "adc.h"
+
 #include <QBoxLayout>
 
 // class definition 'Window'
@@ -24,6 +26,8 @@ public slots:
 
 // internal variables for the window class
 private:
+	Adc adc;
+
   // graphical elements from the Qwt library - http://qwt.sourceforge.net/annotated.html
 	QwtKnob      knob;
 	QwtThermo    thermo;

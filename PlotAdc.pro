@@ -6,8 +6,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = PlotAdc
 
-LIBS += -lqwt -lm
+LIBS += -lqwt -lm -lbcm2835 -lrt
 
-HEADERS += window.h
+HEADERS += window.h adc.h gz_clk.h
 
-SOURCES += main.cpp window.cpp
+SOURCES += main.cpp window.cpp adc.cpp gz_clk.c
