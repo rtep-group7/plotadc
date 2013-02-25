@@ -94,7 +94,7 @@ Adc::~Adc()
   close(fd);
 }
 
-int Adc::readValue()
+uint16_t Adc::readValue()
 {
 	  int d=0;
 	  do {
@@ -109,7 +109,7 @@ int Adc::readValue()
 	  // tell the AD7705 to read the data register (16 bits)
 	  writeReg(0x38);
 	  // read the data register by performing two 8 bit reads
-	  int value = readData()-0x8000;
+	  uint16_t value = readData()-0x8000;
 
 	  return value;
 }
@@ -173,7 +173,7 @@ uint8_t Adc::readReg()
 	return rx1[0];
 }
 
-int Adc::readData()
+uint16_t Adc::readData()
 {
 	int ret;
 	uint8_t tx1[2] = {0,0};

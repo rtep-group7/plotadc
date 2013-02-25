@@ -50,9 +50,7 @@ Window::Window() : plot( QString("Example Plot") ), gain(5), count(0),
 
 void Window::timerEvent( QTimerEvent * )
 {
-	// generate an sine wave input for example purposes - you must get yours from the A/D!
-	//double inVal = gain * sin( M_PI * count/50.0 );
-  double inVal = (double)adc.readValue() / 32768.0;
+  double inVal = gain * static_cast<double>(adc.readValue()) / 32768.0;
 	++count;
 
 	// add the new input to the plot

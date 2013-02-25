@@ -20,7 +20,7 @@ class Adc
       uint16_t dly);
   ~Adc();
 
-  int readValue();
+  uint16_t readValue();
 
  private:
   int fd;
@@ -31,7 +31,7 @@ class Adc
   void writeReset();
   void writeReg(uint8_t v);
   uint8_t readReg();
-  int readData();
+  uint16_t readData();
 };
 
 #endif // ADC_H
