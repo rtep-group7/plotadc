@@ -1,6 +1,6 @@
 #include "window.h"
 
-Window::Window() : plot( QString("Example Plot") ), gain(5), count(0),
+Window::Window() : plot( QString("Example Plot") ), gain(1), count(0),
 		   adc("/dev/spidev0.0",
 		       SPI_CPHA | SPI_CPOL,
 		       8,50000,10)

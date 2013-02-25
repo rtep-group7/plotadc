@@ -26,8 +26,6 @@ public slots:
 
 // internal variables for the window class
 private:
-	Adc adc;
-
   // graphical elements from the Qwt library - http://qwt.sourceforge.net/annotated.html
 	QwtKnob      knob;
 	QwtThermo    thermo;
@@ -46,6 +44,8 @@ private:
 
 	double gain;
 	int count;
+
+	Adc adc;
 };
 
 #endif // WINDOW_H
