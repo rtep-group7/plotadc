@@ -1,8 +1,5 @@
 #include "window.h"
 
-#include <cmath>  // for sine stuff
-
-
 Window::Window() : plot( QString("Example Plot") ), gain(5), count(0),
 		   adc("/dev/spidev0.0",
 		       SPI_CPHA | SPI_CPOL,
@@ -25,7 +22,7 @@ Window::Window() : plot( QString("Example Plot") ), gain(5), count(0),
 	for( int index=0; index<plotDataSize; ++index )
 	{
 		xData[index] = index;
-		yData[index] = gain * sin( M_PI * index/50 );
+		yData[index] = 0;
 	}
 
 	// make a plot curve from the data and attach it to the plot
