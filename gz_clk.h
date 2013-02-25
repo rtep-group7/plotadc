@@ -22,10 +22,18 @@
 #ifndef GZ_CLK_H
 #define GZ_CLK_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define GZ_CLK_5MHz 0
 #define GZ_CLK_125MHz 1
 
 int gz_clock_ena(int speed, int divider);
 int gz_clock_dis();
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // GZ_CLK_H
