@@ -1,4 +1,5 @@
 #include "window.h"
+#include <cmath>
 
 Window::Window() : plot( QString("Example Plot") ), gain(1), count(0),
 		   adc("/dev/spidev0.0",
@@ -47,12 +48,22 @@ Window::Window() : plot( QString("Example Plot") ), gain(1), count(0),
 
 void Window::timerEvent( QTimerEvent * )
 {
-  double inVal = gain * static_cast<double>(adc.readValue()) / 32768.0;
+  // read adc voltage reading across thermistor
+  double inVal = static_cast<double>(adc.readValue());
+  double R = 1000.0 / ((inVal / std::pow(2.0, 16.0)) + 0.2) - 1000.0;
+
+  // use beta-equation to calculate temperature
+  const double beta = 3499.0;
+  const double R0 = 1000.0;
+  const double T0 = 272.15 + 25.0;
+  double kelvin = beta / log(R / (R0 * exp(-beta / T0)));
+  double celsius = kelvin - 272.15;
+
 	++count;
 
 	// add the new input to the plot
 	memmove( yData, yData+1, (plotDataSize-1) * sizeof(double) );
-	yData[plotDataSize-1] = inVal;
+	yData[plotDataSize-1] = celsius;
 	curve.setSamples(xData, yData, plotDataSize);
 	plot.replot();
 
